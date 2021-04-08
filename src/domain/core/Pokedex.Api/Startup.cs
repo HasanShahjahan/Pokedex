@@ -1,16 +1,17 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
+using Pokedex.DataObjects.Settings;
+using Pokedex.Security.Handlers;
+using Pokedex.Validator;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace Pokedex.Api
 {
@@ -23,15 +24,17 @@ namespace Pokedex.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var settings = GetAppConfigurationSection();
             services.AddControllers();
             services.AddApiVersioning();
             ConfigureSwaggerServices(services);
+            ConfigureSingletonServices(services);
+            ConfigureTransientServices(services);
+            ConfigureJwtAuthentication(services, settings);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -57,6 +60,23 @@ namespace Pokedex.Api
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Pokedex API");
 
             });
+        }
+
+        private AppSettings GetAppConfigurationSection()
+        {
+            return Configuration.GetSection("AppSettings").Get<AppSettings>();
+        }
+
+        private void ConfigureSingletonServices(IServiceCollection services)
+        {
+            var settings = GetAppConfigurationSection();
+            services.AddSingleton(settings);
+        }
+
+        private void ConfigureTransientServices(IServiceCollection services)
+        {
+            services.AddTransient(typeof(IValidator), typeof(PayloadValidator));
+            services.AddTransient(typeof(IJwtTokenHandler), typeof(JwtTokenHandler));
         }
 
         private static void ConfigureSwaggerServices(IServiceCollection services)
@@ -101,6 +121,28 @@ namespace Pokedex.Api
                     });
 
             });
+        }
+
+        private void ConfigureJwtAuthentication(IServiceCollection services, AppSettings appSettings)
+        {
+            var key = Encoding.ASCII.GetBytes(appSettings.JsonWebTokens.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            IdentityModelEventSource.ShowPII = true;
         }
     }
 }
