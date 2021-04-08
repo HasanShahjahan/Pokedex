@@ -29,23 +29,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{DB7D55
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Test.Api", "test\api\Pokedex.Test.Api\Pokedex.Test.Api.csproj", "{EF24895D-ED6D-41AB-9903-B040AFF01EF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Test.Resolver", "test\common\Pokedex.Test.Resolver\Pokedex.Test.Resolver.csproj", "{003053F7-554C-4CEE-8443-89446B3019F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Test.Resolver", "test\common\Pokedex.Test.Resolver\Pokedex.Test.Resolver.csproj", "{003053F7-554C-4CEE-8443-89446B3019F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Test.Unit", "test\unit\Pokedex.Test.Unit\Pokedex.Test.Unit.csproj", "{49491030-B528-45C9-8016-A8D6E609137E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Test.Unit", "test\unit\Pokedex.Test.Unit\Pokedex.Test.Unit.csproj", "{49491030-B528-45C9-8016-A8D6E609137E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Common", "src\domain\common\Pokedex.Common\Pokedex.Common.csproj", "{CCF96379-3F30-4555-BAF2-CD0EE9CB3DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Common", "src\domain\common\Pokedex.Common\Pokedex.Common.csproj", "{CCF96379-3F30-4555-BAF2-CD0EE9CB3DD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Security", "src\domain\security\Pokedex.Security\Pokedex.Security.csproj", "{06EF7ABA-D486-4E8A-8BAD-13EF1A22990C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Security", "src\domain\security\Pokedex.Security\Pokedex.Security.csproj", "{06EF7ABA-D486-4E8A-8BAD-13EF1A22990C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Infrastructure", "src\infrastructure\Pokedex.Infrastructure\Pokedex.Infrastructure.csproj", "{B40C2282-5FCC-4250-845F-AA083A4936D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Infrastructure", "src\infrastructure\Pokedex.Infrastructure\Pokedex.Infrastructure.csproj", "{B40C2282-5FCC-4250-845F-AA083A4936D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.DataObjects", "src\domain\common\Pokedex.DataObjects\Pokedex.DataObjects.csproj", "{9539FC4B-1488-42CD-A74D-C91AFA700683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.DataObjects", "src\domain\common\Pokedex.DataObjects\Pokedex.DataObjects.csproj", "{9539FC4B-1488-42CD-A74D-C91AFA700683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Validator", "src\domain\common\Pokedex.Validator\Pokedex.Validator.csproj", "{ADD9A6EC-4E1D-49A0-AD35-79213C1BD81A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Validator", "src\domain\common\Pokedex.Validator\Pokedex.Validator.csproj", "{ADD9A6EC-4E1D-49A0-AD35-79213C1BD81A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Domain", "src\domain\core\Pokedex.Domain\Pokedex.Domain.csproj", "{EBEE6B84-0FF7-4FCA-83DD-95F0B66F427B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Domain", "src\domain\core\Pokedex.Domain\Pokedex.Domain.csproj", "{EBEE6B84-0FF7-4FCA-83DD-95F0B66F427B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.Entities", "src\domain\core\Pokedex.Entities\Pokedex.Entities.csproj", "{6CAB27AD-84BB-4F21-8A20-2E945BDAAFAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Entities", "src\domain\core\Pokedex.Entities\Pokedex.Entities.csproj", "{6CAB27AD-84BB-4F21-8A20-2E945BDAAFAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

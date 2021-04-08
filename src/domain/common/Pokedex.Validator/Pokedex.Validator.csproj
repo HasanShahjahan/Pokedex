@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\security\Pokedex.Security\Pokedex.Security.csproj" />
+    <ProjectReference Include="..\Pokedex.Common\Pokedex.Common.csproj" />
+    <ProjectReference Include="..\Pokedex.DataObjects\Pokedex.DataObjects.csproj" />
+  </ItemGroup>
+
 </Project>
