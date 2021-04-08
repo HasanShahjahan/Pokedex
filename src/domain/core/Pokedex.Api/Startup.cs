@@ -8,14 +8,18 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Pokedex.DataObjects.Settings;
+using Pokedex.Domain.Interfaces;
+using Pokedex.Domain.Services;
+using Pokedex.Infrastructure.Repository;
 using Pokedex.Security.Handlers;
 using Pokedex.Validator;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Pokedex.Api
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -33,6 +37,7 @@ namespace Pokedex.Api
             ConfigureSingletonServices(services);
             ConfigureTransientServices(services);
             ConfigureJwtAuthentication(services, settings);
+            services.AddMemoryCache();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -77,6 +82,9 @@ namespace Pokedex.Api
         {
             services.AddTransient(typeof(IValidator), typeof(PayloadValidator));
             services.AddTransient(typeof(IJwtTokenHandler), typeof(JwtTokenHandler));
+            services.AddTransient(typeof(IAutoRefreshingCacheService), typeof(AutoRefreshingCacheService));
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IPokemonService), typeof(PokemonService));
         }
 
         private static void ConfigureSwaggerServices(IServiceCollection services)
