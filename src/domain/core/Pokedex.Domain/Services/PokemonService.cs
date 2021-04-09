@@ -1,6 +1,6 @@
-﻿using Pokedex.DataObjects.Models;
-using Pokedex.Domain.Interfaces;
+﻿using Pokedex.Domain.Interfaces;
 using Pokedex.Domain.Mappers;
+using Pokedex.Entities;
 using Pokedex.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
@@ -19,9 +19,7 @@ namespace Pokedex.Domain.Services
 
         public Pokemon GetInformation(string pokemonName)
         {
-            var result = _pokemonRepository.GetInformationAsync(pokemonName);
-            if (result == null) return new Pokemon();
-            return PokemonMapper.ToObject(result);
+            return _pokemonRepository.GetInformationAsync(pokemonName);
         }
     }
 }

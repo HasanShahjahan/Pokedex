@@ -10,19 +10,32 @@ namespace Pokedex.Api.Controllers
     public class PokemonController : ControllerBase
     {
         private readonly IValidator _payloadValidator;
-        private readonly IPokemonService _pokemonService;
-        public PokemonController(IValidator payloadValidator, IPokemonService pokemonService)
+        private readonly IPokemonManager _pokemonManager;
+
+        public PokemonController(IValidator payloadValidator, IPokemonManager pokemonManager)
         {
             _payloadValidator = payloadValidator;
-            _pokemonService = pokemonService;
+            _pokemonManager = pokemonManager;
         }
+
         [HttpGet("pokemon/{name}")]
         public IActionResult GetInformation(string name)
         {
             var (statusCode, errorResult) = _payloadValidator.PayloadValidator(Request.Headers[HeaderNames.Authorization], name);
             if (statusCode != StatusCodes.Status200OK) return StatusCode(statusCode, errorResult);
 
-            var result = _pokemonService.GetInformation(name);
+            var result = _pokemonManager.GetInformation(name);
+            if (string.IsNullOrEmpty(result.Name)) return StatusCode(StatusCodes.Status401Unauthorized, new ApplicationException { ErrorCode = ApplicationErrorCodes.Unauthorized, Data = new ErrorData() { Field = "Name", Message = ApplicationErrorCodes.GetMessage(ApplicationErrorCodes.Unauthorized) } });
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+
+        [HttpGet("pokemon/translated/{name}")]
+        public IActionResult GetTranslatedInformation(string name)
+        {
+            var (statusCode, errorResult) = _payloadValidator.PayloadValidator(Request.Headers[HeaderNames.Authorization], name);
+            if (statusCode != StatusCodes.Status200OK) return StatusCode(statusCode, errorResult);
+
+            var result = _pokemonManager.GetTranslatedInformation(name);
             if (string.IsNullOrEmpty(result.Name)) return StatusCode(StatusCodes.Status401Unauthorized, new ApplicationException { ErrorCode = ApplicationErrorCodes.Unauthorized, Data = new ErrorData() { Field = "Name", Message = ApplicationErrorCodes.GetMessage(ApplicationErrorCodes.Unauthorized) } });
             return StatusCode(StatusCodes.Status200OK, result);
         }

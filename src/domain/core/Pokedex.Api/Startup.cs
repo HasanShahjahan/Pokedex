@@ -9,11 +9,14 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Pokedex.DataObjects.Settings;
 using Pokedex.Domain.Interfaces;
+using Pokedex.Domain.Managers;
 using Pokedex.Domain.Services;
+using Pokedex.External.Interface.CustomService;
+using Pokedex.External.Interface.RestClient;
+using Pokedex.External.Interface.RestClientService;
 using Pokedex.Infrastructure.Repository;
 using Pokedex.Security.Handlers;
 using Pokedex.Validator;
-using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -85,6 +88,9 @@ namespace Pokedex.Api
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IPokemonService), typeof(PokemonService));
             services.AddTransient(typeof(IPokemonRepository), typeof(PokemonRepository));
+            services.AddTransient(typeof(IPokemonManager), typeof(PokemonManager));
+            services.AddTransient(typeof(IRestClientHandler), typeof(RestClientHandler));
+            services.AddTransient(typeof(ITranslatedPokemon), typeof(TranslatedPokemon));
         }
 
         private static void ConfigureSwaggerServices(IServiceCollection services)

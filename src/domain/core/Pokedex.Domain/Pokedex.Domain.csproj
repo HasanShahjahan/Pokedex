@@ -10,7 +10,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\infrastructure\Pokedex.Infrastructure\Pokedex.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\common\Pokedex.Common\Pokedex.Common.csproj" />
     <ProjectReference Include="..\..\common\Pokedex.DataObjects\Pokedex.DataObjects.csproj" />
+    <ProjectReference Include="..\..\External\Pokedex.External.Interface\Pokedex.External.Interface.csproj" />
   </ItemGroup>
 
 </Project>

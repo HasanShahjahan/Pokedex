@@ -9,5 +9,6 @@ namespace Pokedex.DataObjects.Settings
         public DatabaseSettings DatabaseSettings { get; set; }
         public Token JsonWebTokens { get; set; }
         public MemoryCache MemoryCache { get; set; }
+        public Translator Translator { get; set; }
     }
 }
