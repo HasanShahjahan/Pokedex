@@ -106,7 +106,7 @@ namespace Pokedex.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operating system denies access..
+        ///   Looks up a localized string similar to The credentials provided aren&apos;t valid..
         /// </summary>
         public static string Unauthorized {
             get {

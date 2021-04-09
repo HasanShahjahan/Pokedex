@@ -32,7 +32,6 @@ namespace Pokedex.Api
         {
             var settings = GetAppConfigurationSection();
             services.AddControllers();
-            services.AddApiVersioning();
             ConfigureSwaggerServices(services);
             ConfigureSingletonServices(services);
             ConfigureTransientServices(services);
@@ -85,6 +84,7 @@ namespace Pokedex.Api
             services.AddTransient(typeof(IAutoRefreshingCacheService), typeof(AutoRefreshingCacheService));
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IPokemonService), typeof(PokemonService));
+            services.AddTransient(typeof(IPokemonRepository), typeof(PokemonRepository));
         }
 
         private static void ConfigureSwaggerServices(IServiceCollection services)

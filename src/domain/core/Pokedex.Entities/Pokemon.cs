@@ -8,6 +8,14 @@ namespace Pokedex.Entities
 {
     public class Pokemon : BaseEntity
     {
+        public Pokemon() 
+        {
+            Name = string.Empty;
+            Description = string.Empty;
+            Habitat = string.Empty;
+            IsLegendary = false;
+        }
+
         [BsonElement("Name")]
         public string Name { get; set; }
 

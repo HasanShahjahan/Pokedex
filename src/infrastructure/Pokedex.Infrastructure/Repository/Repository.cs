@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Pokedex.DataObjects.Settings;
+using Pokedex.Infrastructure.Seeder;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,6 +17,7 @@ namespace Pokedex.Infrastructure.Repository
             _appSettings = appSettings;
             _mongoClient = new MongoClient(_appSettings.DatabaseSettings.ConnectionString);
             _database = _mongoClient.GetDatabase(_appSettings.DatabaseSettings.DatabaseName);
+            SeedingMongoDb.BulkInsertMongoDb(_database, _appSettings.DatabaseSettings.CollectionName);
         }
 
         public IMongoCollection<T> Get()
@@ -29,7 +31,5 @@ namespace Pokedex.Infrastructure.Repository
             var result = _database.GetCollection<T>(_appSettings.DatabaseSettings.CollectionName).Find(predicate).FirstOrDefault();
             return result;
         }
-
-       
     }
 }

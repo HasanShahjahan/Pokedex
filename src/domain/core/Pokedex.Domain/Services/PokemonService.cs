@@ -19,7 +19,8 @@ namespace Pokedex.Domain.Services
 
         public Pokemon GetInformation(string pokemonName)
         {
-           var result = _pokemonRepository.GetInformationAsync(pokemonName);
+            var result = _pokemonRepository.GetInformationAsync(pokemonName);
+            if (result == null) return new Pokemon();
             return PokemonMapper.ToObject(result);
         }
     }

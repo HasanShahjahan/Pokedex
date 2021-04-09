@@ -14,8 +14,9 @@ namespace Pokedex.Infrastructure.Repository
         }
         public Pokemon GetInformationAsync(string name)
         {
-            var result = _repository.Get(c => c.Name == name);
-            return result;
+            var pokemon = new Pokemon();
+            pokemon = _repository.Get(c => c.Name.ToLower() == name.ToLower());
+            return pokemon;
         }
     }
 }
