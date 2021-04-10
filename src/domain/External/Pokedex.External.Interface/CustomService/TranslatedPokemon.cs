@@ -3,6 +3,7 @@ using Pokedex.External.Interface.RestClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Pokedex.External.Interface.CustomService
 {
@@ -15,9 +16,9 @@ namespace Pokedex.External.Interface.CustomService
             _restClientHandler = restClientHandler;
         }
 
-        public string GetDescription(string baseUrl, string resource, bool flag, string apiKey, string text) 
+        public async Task<string> GetDescription(string baseUrl, string resource, bool flag, string apiKey, string text) 
         {
-            var description = _restClientHandler.GetDescription(baseUrl, resource, flag, apiKey, text);
+            var description = await _restClientHandler.GetDescription(baseUrl, resource, flag, apiKey, text);
             return description;
         }
     }

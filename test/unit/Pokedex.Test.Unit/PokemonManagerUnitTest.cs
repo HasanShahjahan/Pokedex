@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Pokedex.Api;
 using Pokedex.Domain.Interfaces;
 using Pokedex.Test.Resolver;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Pokedex.Test.Unit
@@ -17,35 +18,35 @@ namespace Pokedex.Test.Unit
         }
 
         [Fact]
-        public void NotFoundInformation()
+        public async Task NotFoundInformation()
         {
             var pokemonManager = _serviceProvider.GetService<IPokemonManager>();
-            var result = pokemonManager.GetInformation("TrueLayer", false);
+            var result = await pokemonManager.GetInformation("TrueLayer", false);
             Assert.Empty(result.Name);
         }
 
         [Fact]
-        public void GetInformation()
+        public async Task GetInformation()
         {
             var pokemonManager = _serviceProvider.GetService<IPokemonManager>();
-            var result = pokemonManager.GetInformation("Hasan", false);
+            var result = await pokemonManager.GetInformation("Hasan", false);
             Assert.Equal("Hasan", result.Name);
             Assert.NotEmpty(result.Description);
         }
 
         [Fact]
-        public void NotFoundInformationWithFunTransalation()
+        public async Task NotFoundInformationWithFunTransalation()
         {
             var pokemonManager = _serviceProvider.GetService<IPokemonManager>();
-            var result = pokemonManager.GetInformation("TrueLayer", true);
+            var result = await pokemonManager.GetInformation("TrueLayer", true);
             Assert.Empty(result.Name);
         }
 
         [Fact]
-        public void GetInformationWithFunTransalation()
+        public async Task GetInformationWithFunTransalation()
         {
             var pokemonManager = _serviceProvider.GetService<IPokemonManager>();
-            var result = pokemonManager.GetInformation("Hasan", true);
+            var result = await pokemonManager.GetInformation("Hasan", true);
             Assert.Equal("Hasan", result.Name);
             Assert.NotEmpty(result.Description);
         }

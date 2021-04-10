@@ -1,8 +1,10 @@
 ﻿using Pokedex.DataObjects.Models;
+using System.Threading.Tasks;
+
 namespace Pokedex.Domain.Interfaces
 {
     public interface IPokemonManager
     {
-        Pokemon GetInformation(string pokemonName, bool isTranslated);
+        Task<Pokemon> GetInformation(string pokemonName, bool isTranslated);
     }
 }

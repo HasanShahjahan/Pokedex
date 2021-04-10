@@ -6,6 +6,7 @@ using Pokedex.Domain.Interfaces;
 using Pokedex.Test.Resolver;
 using Pokedex.Validator;
 using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Pokedex.Test.Unit
@@ -39,20 +40,20 @@ namespace Pokedex.Test.Unit
         }
 
         [Fact]
-        public void GetYodaTranslatedDescriptionOrDefault()
+        public async Task GetYodaTranslatedDescriptionOrDefault()
         {
             var pokemonService = _serviceProvider.GetService<IPokemonService>();
-            var result = pokemonService.GetDescription("Open Banking is the secure way to give providers access to your financial information.", "cave", true);
+            var result = await pokemonService.GetDescription("Open Banking is the secure way to give providers access to your financial information.", "cave", true);
 
             if (result == yodaDescription) Assert.Equal(yodaDescription, result);
             else Assert.Equal(description, result);
         }
 
         [Fact]
-        public void GetShakespeareTranslatedDescriptionOrDefault()
+        public async Task GetShakespeareTranslatedDescriptionOrDefault()
         {
             var pokemonService = _serviceProvider.GetService<IPokemonService>();
-            var result = pokemonService.GetDescription("Open Banking is the secure way to give providers access to your financial information.", "rare", false);
+            var result = await pokemonService.GetDescription("Open Banking is the secure way to give providers access to your financial information.", "rare", false);
 
             if (result == shakespeareDescription) Assert.Equal(shakespeareDescription, result);
             else Assert.Equal(description, result);
