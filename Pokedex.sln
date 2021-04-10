@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.Entities", "src\dom
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{CBC843D0-BD84-4EA2-8CF4-2757B2B5276B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pokedex.External.Interface", "src\domain\External\Pokedex.External.Interface\Pokedex.External.Interface.csproj", "{3ABEC140-C0C4-42A8-B734-CE222C868F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pokedex.External.Interface", "src\domain\External\Pokedex.External.Interface\Pokedex.External.Interface.csproj", "{3ABEC140-C0C4-42A8-B734-CE222C868F24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
