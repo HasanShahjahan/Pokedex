@@ -5,6 +5,7 @@ using Pokedex.DataObjects.Settings;
 using Pokedex.External.Interface.CustomService;
 using Pokedex.External.Interface.RestClient;
 using Pokedex.Test.Resolver;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Pokedex.Test.Unit
@@ -26,19 +27,19 @@ namespace Pokedex.Test.Unit
 
        
         [Fact]
-        public void GetYodaTranslatedDescriptionOrDefault()
+        public async Task GetYodaTranslatedDescriptionOrDefault()
         {
             var restClientHandler = _serviceProvider.GetService<IRestClientHandler>();
-            var result = restClientHandler.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Yoda.Resource, _appSettings.Translator.Yoda.IsPaid, _appSettings.Translator.Yoda.Key , description);
+            var result = await restClientHandler.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Yoda.Resource, _appSettings.Translator.Yoda.IsPaid, _appSettings.Translator.Yoda.Key , description);
             if(!string.IsNullOrEmpty(result)) Assert.Equal(yodaDescription, result);
             else Assert.Equal(string.Empty, result);
         }
 
         [Fact]
-        public void GetShakespeareTranslatedDescriptionOrDefault()
+        public async Task GetShakespeareTranslatedDescriptionOrDefault()
         {
             var restClientHandler = _serviceProvider.GetService<IRestClientHandler>();
-            var result = restClientHandler.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Shakespeare.Resource, _appSettings.Translator.Shakespeare.IsPaid, _appSettings.Translator.Shakespeare.Key, description);
+            var result = await restClientHandler.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Shakespeare.Resource, _appSettings.Translator.Shakespeare.IsPaid, _appSettings.Translator.Shakespeare.Key, description);
             if(!string.IsNullOrEmpty(result)) Assert.Equal(shakespeareDescription, result);
             else Assert.Equal(string.Empty, result);
         }

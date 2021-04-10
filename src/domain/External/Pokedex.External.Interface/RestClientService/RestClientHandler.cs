@@ -3,6 +3,7 @@ using Pokedex.DataObjects.Settings;
 using Pokedex.External.Interface.Model;
 using Pokedex.External.Interface.RestClient;
 using RestSharp;
+using System.Threading.Tasks;
 
 namespace Pokedex.External.Interface.RestClientService
 {
@@ -15,7 +16,7 @@ namespace Pokedex.External.Interface.RestClientService
             _appSettings = appSettings;
             _client = new RestSharp.RestClient(_appSettings.Translator.Url);
         }
-        public string GetDescription(string baseUrl, string resource, bool flag, string apiKey, string text)
+        public async Task<string> GetDescription(string baseUrl, string resource, bool flag, string apiKey, string text)
         {
             try 
             {
@@ -23,7 +24,7 @@ namespace Pokedex.External.Interface.RestClientService
                 if (flag) request.AddParameter("api_key", apiKey);
                 request.AddParameter("text", text, ParameterType.QueryString);
 
-                var response = _client.Execute(request);
+                var response = await _client.ExecuteAsync(request);
                 var result = JsonConvert.DeserializeObject<TranslationResponse>(response.Content);
                 return result?.Contents?.Translated;
             }

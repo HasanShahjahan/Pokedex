@@ -2,6 +2,7 @@
 using Pokedex.DataObjects.Models;
 using Pokedex.Domain.Interfaces;
 using Pokedex.Domain.Mappers;
+using System.Threading.Tasks;
 
 namespace Pokedex.Domain.Managers
 {
@@ -17,13 +18,13 @@ namespace Pokedex.Domain.Managers
             _logger = logger;
         }
 
-        public Pokemon GetInformation(string pokemonName, bool isTranslated)
+        public async Task<Pokemon> GetInformation(string pokemonName, bool isTranslated)
         {
             _logger.LogInformation("[Pokemon Manager] [Get Information] [Pokemon Type : isTranslated - ] " + isTranslated);
             var result = _pokemonService.GetInformation(pokemonName);
             if (result == null) return new Pokemon();
 
-            if(isTranslated) result.Description = _pokemonService.GetDescription(result.Description, result.Habitat, result.IsLegendary);
+            if(isTranslated) result.Description = await _pokemonService.GetDescription(result.Description, result.Habitat, result.IsLegendary);
             return PokemonMapper.ToObject(result);
         }
     }

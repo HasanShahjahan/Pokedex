@@ -5,6 +5,7 @@ using Pokedex.Domain.Interfaces;
 using Pokedex.Entities;
 using Pokedex.External.Interface.CustomService;
 using Pokedex.Infrastructure.Repository;
+using System.Threading.Tasks;
 
 namespace Pokedex.Domain.Services
 {
@@ -28,11 +29,11 @@ namespace Pokedex.Domain.Services
             return _pokemonRepository.GetInformationAsync(pokemonName);
         }
 
-        public string GetDescription(string description, string habitat, bool isLegendary)
+        public async Task<string> GetDescription(string description, string habitat, bool isLegendary)
         {
             string result = habitat == Habitat.Cave || isLegendary
-                ? _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Yoda.Resource, _appSettings.Translator.Yoda.IsPaid, _appSettings.Translator.Yoda.Key, description)
-                : _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Shakespeare.Resource, _appSettings.Translator.Shakespeare.IsPaid, _appSettings.Translator.Shakespeare.Key, description);
+                ? await _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Yoda.Resource, _appSettings.Translator.Yoda.IsPaid, _appSettings.Translator.Yoda.Key, description)
+                : await _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Shakespeare.Resource, _appSettings.Translator.Shakespeare.IsPaid, _appSettings.Translator.Shakespeare.Key, description);
 
             _logger.LogInformation("[Pokemon Service] [Description] " + result);
             return string.IsNullOrEmpty(result) ? description : result;

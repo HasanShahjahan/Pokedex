@@ -7,6 +7,7 @@ using Pokedex.Api.Filters;
 using Pokedex.Common.Exceptions;
 using Pokedex.Domain.Interfaces;
 using Pokedex.Validator;
+using System.Threading.Tasks;
 
 namespace Pokedex.Api.Controllers
 {
@@ -25,7 +26,7 @@ namespace Pokedex.Api.Controllers
         }
 
         [HttpGet("pokemon/{name}")]
-        public IActionResult GetInformation(string name)
+        public async Task<IActionResult> GetInformation(string name)
         {
             _logger.LogInformation("[Pokemon Controller] [Get Information] [Pokemon Name : ]" + JsonConvert.SerializeObject(name));
             var (statusCode, errorResult) = _payloadValidator.PayloadValidator(Request.Headers[HeaderNames.Authorization], name);
@@ -33,7 +34,7 @@ namespace Pokedex.Api.Controllers
             _logger.LogWarning("[Pokemon Controller] [Get Information] [Pokemon Name : ] " + JsonConvert.SerializeObject(errorResult));
             if (statusCode != StatusCodes.Status200OK) return StatusCode(statusCode, errorResult);
 
-            var result = _pokemonManager.GetInformation(name, false); // IsTranslated information is false
+            var result = await _pokemonManager.GetInformation(name, false); // IsTranslated information is false
             _logger.LogWarning("[Pokemon Controller] [Get Information] [Result : ] " + JsonConvert.SerializeObject(result));
             if (string.IsNullOrEmpty(result.Name)) return StatusCode(StatusCodes.Status401Unauthorized, new ApplicationException { ErrorCode = ApplicationErrorCodes.Unauthorized, Data = new ErrorData() { Field = "Name", Message = ApplicationErrorCodes.GetMessage(ApplicationErrorCodes.Unauthorized) } });
             
@@ -41,7 +42,7 @@ namespace Pokedex.Api.Controllers
         }
 
         [HttpGet("pokemon/translated/{name}")]
-        public IActionResult GetTranslatedInformation(string name)
+        public async Task<IActionResult> GetTranslatedInformation(string name)
         {
             _logger.LogInformation("[Pokemon Controller] [Get Translated Information] [Pokemon Name : ]" + JsonConvert.SerializeObject(name));
             var (statusCode, errorResult) = _payloadValidator.PayloadValidator(Request.Headers[HeaderNames.Authorization], name);
@@ -49,7 +50,7 @@ namespace Pokedex.Api.Controllers
             _logger.LogWarning("[Pokemon Controller] [Get Translated Information] [Pokemon Name : ] " + JsonConvert.SerializeObject(errorResult));
             if (statusCode != StatusCodes.Status200OK) return StatusCode(statusCode, errorResult);
 
-            var result = _pokemonManager.GetInformation(name, true); // IsTranslated information is true
+            var result = await _pokemonManager.GetInformation(name, true); // IsTranslated information is true
             _logger.LogWarning("[Pokemon Controller] [Get Translated Information] [Result : ] " + JsonConvert.SerializeObject(result));
             if (string.IsNullOrEmpty(result.Name)) return StatusCode(StatusCodes.Status401Unauthorized, new ApplicationException { ErrorCode = ApplicationErrorCodes.Unauthorized, Data = new ErrorData() { Field = "Name", Message = ApplicationErrorCodes.GetMessage(ApplicationErrorCodes.Unauthorized) } });
             
