@@ -25,13 +25,13 @@ namespace Pokedex.Domain.Services
             return _pokemonRepository.GetInformationAsync(pokemonName);
         }
 
-        public string GetDescription(Pokemon model)
+        public string GetDescription(string description, string habitat, bool isLegendary)
         {
-            string description = model.Habitat == Habitat.Cave || model.IsLegendary
-                ? _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Yoda.Resource, _appSettings.Translator.Yoda.IsPaid, _appSettings.Translator.Yoda.Key, model.Description)
-                : _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Shakespeare.Resource, _appSettings.Translator.Shakespeare.IsPaid, _appSettings.Translator.Shakespeare.Key, model.Description);
+            string result = habitat == Habitat.Cave || isLegendary
+                ? _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Yoda.Resource, _appSettings.Translator.Yoda.IsPaid, _appSettings.Translator.Yoda.Key, description)
+                : _translatedPokemon.GetDescription(_appSettings.Translator.Url, _appSettings.Translator.Shakespeare.Resource, _appSettings.Translator.Shakespeare.IsPaid, _appSettings.Translator.Shakespeare.Key, description);
             
-            return model.Description = string.IsNullOrEmpty(description) ? model.Description : description;
+            return string.IsNullOrEmpty(result) ? description : result;
         }
     }
 }

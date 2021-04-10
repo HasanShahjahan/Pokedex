@@ -19,7 +19,7 @@ namespace Pokedex.Domain.Managers
             var result = _pokemonService.GetInformation(pokemonName);
             if (result == null) return new Pokemon();
 
-            if(isTranslated) result.Description = _pokemonService.GetDescription(result);
+            if(isTranslated) result.Description = _pokemonService.GetDescription(result.Description, result.Habitat, result.IsLegendary);
             return PokemonMapper.ToObject(result);
         }
     }
