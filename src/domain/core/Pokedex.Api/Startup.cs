@@ -81,6 +81,8 @@ namespace Pokedex.Api
         {
             var settings = GetAppConfigurationSection();
             services.AddSingleton(settings);
+            services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
+            services.AddSingleton(typeof(IRestClientHandler), typeof(RestClientHandler));
         }
 
         private void ConfigureTransientServices(IServiceCollection services)
@@ -88,11 +90,9 @@ namespace Pokedex.Api
             services.AddTransient(typeof(IValidator), typeof(PayloadValidator));
             services.AddTransient(typeof(IJwtTokenHandler), typeof(JwtTokenHandler));
             services.AddTransient(typeof(IAutoRefreshingCacheService), typeof(AutoRefreshingCacheService));
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IPokemonService), typeof(PokemonService));
             services.AddTransient(typeof(IPokemonRepository), typeof(PokemonRepository));
             services.AddTransient(typeof(IPokemonManager), typeof(PokemonManager));
-            services.AddTransient(typeof(IRestClientHandler), typeof(RestClientHandler));
             services.AddTransient(typeof(ITranslatedPokemon), typeof(TranslatedPokemon));
         }
 

@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using Pokedex.Api.Filters;
 using Pokedex.Common.Exceptions;
 using Pokedex.Domain.Interfaces;
 using Pokedex.Validator;
 
 namespace Pokedex.Api.Controllers
 {
+    [GlobalExceptionFilter]
     public class PokemonController : ControllerBase
     {
         private readonly IValidator _payloadValidator;
