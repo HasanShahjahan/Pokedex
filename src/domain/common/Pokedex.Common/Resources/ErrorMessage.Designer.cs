@@ -61,7 +61,7 @@ namespace Pokedex.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SQL Server Configuration Exception..
+        ///   Looks up a localized string similar to MongoDB Configuration Exception..
         /// </summary>
         public static string DatabaseError {
             get {

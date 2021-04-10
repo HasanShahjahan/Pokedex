@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -17,6 +18,7 @@ using Pokedex.External.Interface.RestClientService;
 using Pokedex.Infrastructure.Repository;
 using Pokedex.Security.Handlers;
 using Pokedex.Validator;
+using Serilog;
 using System.Collections.Generic;
 using System.Text;
 
@@ -42,8 +44,9 @@ namespace Pokedex.Api
             services.AddMemoryCache();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddSerilog();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -78,6 +81,8 @@ namespace Pokedex.Api
         {
             var settings = GetAppConfigurationSection();
             services.AddSingleton(settings);
+            services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
+            services.AddSingleton(typeof(IRestClientHandler), typeof(RestClientHandler));
         }
 
         private void ConfigureTransientServices(IServiceCollection services)
@@ -85,11 +90,9 @@ namespace Pokedex.Api
             services.AddTransient(typeof(IValidator), typeof(PayloadValidator));
             services.AddTransient(typeof(IJwtTokenHandler), typeof(JwtTokenHandler));
             services.AddTransient(typeof(IAutoRefreshingCacheService), typeof(AutoRefreshingCacheService));
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IPokemonService), typeof(PokemonService));
             services.AddTransient(typeof(IPokemonRepository), typeof(PokemonRepository));
             services.AddTransient(typeof(IPokemonManager), typeof(PokemonManager));
-            services.AddTransient(typeof(IRestClientHandler), typeof(RestClientHandler));
             services.AddTransient(typeof(ITranslatedPokemon), typeof(TranslatedPokemon));
         }
 
