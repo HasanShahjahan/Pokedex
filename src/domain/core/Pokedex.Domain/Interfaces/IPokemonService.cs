@@ -8,5 +8,6 @@ namespace Pokedex.Domain.Interfaces
     public interface IPokemonService
     {
         Pokemon GetInformation(string pokemonName);
+        string GetDescription(Pokemon model);
     }
 }

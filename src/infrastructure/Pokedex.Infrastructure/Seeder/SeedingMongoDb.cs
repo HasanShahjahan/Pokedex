@@ -15,7 +15,8 @@ namespace Pokedex.Infrastructure.Seeder
             {
                 new Pokemon { Name = "Craig", Description = "It was created by a scientist after years  of horrific genesplicing and DNA engineering experiments", Habitat = "rare", IsLegendary = true },
                 new Pokemon { Name = "Law", Description = "It was created by a scientist after years  of horrific genesplicing and DNA engineering experiments", Habitat = "cave", IsLegendary = true },
-                new Pokemon { Name = "Hasan", Description = "It was created by a scientist after years  of horrific genesplicing and DNA engineering experiments", Habitat = "rare", IsLegendary = false }
+                new Pokemon { Name = "Hasan", Description = "It was created by a scientist after years  of horrific genesplicing and DNA engineering experiments", Habitat = "rare", IsLegendary = false },
+                new Pokemon { Name = "Bee", Description = "It was created by a scientist after years  of horrific genesplicing and DNA engineering experiments", Habitat = "cave", IsLegendary = false }
             };
             var collections = database.GetCollection<Pokemon>(collectionName);
             foreach (var pokemon in pokemons)

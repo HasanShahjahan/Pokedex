@@ -8,12 +8,10 @@ namespace Pokedex.External.Interface.CustomService
 {
     public class TranslatedPokemon : ITranslatedPokemon
     {
-        private readonly AppSettings _appSettings;
         private readonly IRestClientHandler _restClientHandler;
 
-        public TranslatedPokemon(AppSettings appSettings, IRestClientHandler restClientHandler)
+        public TranslatedPokemon(IRestClientHandler restClientHandler)
         {
-            _appSettings = appSettings;
             _restClientHandler = restClientHandler;
         }
 

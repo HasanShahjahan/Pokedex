@@ -24,8 +24,9 @@ namespace Pokedex.Api.Controllers
             var (statusCode, errorResult) = _payloadValidator.PayloadValidator(Request.Headers[HeaderNames.Authorization], name);
             if (statusCode != StatusCodes.Status200OK) return StatusCode(statusCode, errorResult);
 
-            var result = _pokemonManager.GetInformation(name);
+            var result = _pokemonManager.GetInformation(name, false); // IsTranslated information is false
             if (string.IsNullOrEmpty(result.Name)) return StatusCode(StatusCodes.Status401Unauthorized, new ApplicationException { ErrorCode = ApplicationErrorCodes.Unauthorized, Data = new ErrorData() { Field = "Name", Message = ApplicationErrorCodes.GetMessage(ApplicationErrorCodes.Unauthorized) } });
+            
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
@@ -35,8 +36,9 @@ namespace Pokedex.Api.Controllers
             var (statusCode, errorResult) = _payloadValidator.PayloadValidator(Request.Headers[HeaderNames.Authorization], name);
             if (statusCode != StatusCodes.Status200OK) return StatusCode(statusCode, errorResult);
 
-            var result = _pokemonManager.GetTranslatedInformation(name);
+            var result = _pokemonManager.GetInformation(name, true); // IsTranslated information is true
             if (string.IsNullOrEmpty(result.Name)) return StatusCode(StatusCodes.Status401Unauthorized, new ApplicationException { ErrorCode = ApplicationErrorCodes.Unauthorized, Data = new ErrorData() { Field = "Name", Message = ApplicationErrorCodes.GetMessage(ApplicationErrorCodes.Unauthorized) } });
+            
             return StatusCode(StatusCodes.Status200OK, result);
         }
     }

@@ -67,7 +67,7 @@ namespace Pokedex.DataObjects.Models
         /// <returns>
         ///     The Pokemon legendary status in the current url.
         ///</returns>
-        [JsonPropertyName("is_legendary")]
+        [JsonPropertyName("isLegendary")]
         public bool IsLegendary { get; set; }
     }
 }
