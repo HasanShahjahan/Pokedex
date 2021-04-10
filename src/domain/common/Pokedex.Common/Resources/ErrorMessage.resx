@@ -133,6 +133,6 @@
     <value>The requested resource does not exist on the server.</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
-    <value>Operating system denies access.</value>
+    <value>The credentials provided aren't valid.</value>
   </data>
 </root>

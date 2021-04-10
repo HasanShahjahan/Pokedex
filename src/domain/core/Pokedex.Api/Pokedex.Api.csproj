@@ -8,15 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.14" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\infrastructure\Pokedex.Infrastructure\Pokedex.Infrastructure.csproj" />
     <ProjectReference Include="..\..\common\Pokedex.DataObjects\Pokedex.DataObjects.csproj" />
     <ProjectReference Include="..\..\common\Pokedex.Validator\Pokedex.Validator.csproj" />
     <ProjectReference Include="..\..\security\Pokedex.Security\Pokedex.Security.csproj" />
+    <ProjectReference Include="..\Pokedex.Domain\Pokedex.Domain.csproj" />
   </ItemGroup>
 
 

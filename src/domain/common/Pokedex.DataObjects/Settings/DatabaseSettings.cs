@@ -6,6 +6,8 @@ namespace Pokedex.DataObjects.Settings
 {
     public class DatabaseSettings
     {
-        public string SqlServer { get; set; }
+        public string CollectionName { get; set; }
+        public string ConnectionString { get; set; }
+        public string DatabaseName { get; set; }
     }
 }
