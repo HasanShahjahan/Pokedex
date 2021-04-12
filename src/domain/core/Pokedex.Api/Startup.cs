@@ -41,7 +41,6 @@ namespace Pokedex.Api
             ConfigureSingletonServices(services);
             ConfigureTransientServices(services);
             ConfigureJwtAuthentication(services, settings);
-            services.AddMemoryCache();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -89,7 +88,6 @@ namespace Pokedex.Api
         {
             services.AddTransient(typeof(IValidator), typeof(PayloadValidator));
             services.AddTransient(typeof(IJwtTokenHandler), typeof(JwtTokenHandler));
-            services.AddTransient(typeof(IAutoRefreshingCacheService), typeof(AutoRefreshingCacheService));
             services.AddTransient(typeof(IPokemonService), typeof(PokemonService));
             services.AddTransient(typeof(IPokemonRepository), typeof(PokemonRepository));
             services.AddTransient(typeof(IPokemonManager), typeof(PokemonManager));
