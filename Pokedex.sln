@@ -8,6 +8,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DAAEB42B-ADED-4128-A87B-94F97524F09A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{A8331744-E41E-4B32-989C-034382474613}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Pokedex-API Specification.pdf = doc\Pokedex-API Specification.pdf
+		doc\Pokedex-Installation and Deployment.pdf = doc\Pokedex-Installation and Deployment.pdf
+		doc\Pokedex-Master Test Plan.pdf = doc\Pokedex-Master Test Plan.pdf
+		doc\Pokedex-Release Note.pdf = doc\Pokedex-Release Note.pdf
+		doc\Pokedex-System Design.pdf = doc\Pokedex-System Design.pdf
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{4E0211C6-EE5F-4B34-8B53-D0BC35E86FD4}"
 EndProject
